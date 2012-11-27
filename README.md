@@ -48,7 +48,7 @@ stub/Foo/Bar.pm
 
     stub woo => sub {
        "stubbed!";
-    }
+    };
 
 
 
