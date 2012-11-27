@@ -1,17 +1,39 @@
 # NAME
 
-lib::stub - change lib path for stubbing
+lib::stub - スタブ用にライブラリパスを切り替えるもの
 
 
 
 # SYNOPSIS
 
+
+### 宣言
+
     use lib qw/lib/;
     use lib::stub;
     use Foo::Bar;
 
-if $ENV{STUB\_PATH} are given, for example 'stub' , this script load
-stub/Foo/Bar.pm instead of lib/Foo/Bar.pm.
+アプリ本体ファイルで上記のように宣言しておくと、環境変数STUB_ENVが設定されている場合において、
+ライブラリパスにそれが追加される。つまり通常はFoo::Barは lib/Foo/Bar.pmを読み込むが
+スタブパスが仮にstubと指定され、なおかつstub/Foo/Bar.pmが存在する場合はそちらが読み込まれる。
+スタブモジュールではスタブ化したいメソッドのみを下記のように再定義する
+
+### モジュール
+
+    package Foo::Bar;
+    use lib::stub on => "lib";  # <- lib/下にある同名モジュールを上書きするという宣言
+
+    stub foobar => sub {
+        #  元々のモジュールの sub foobar{ } を上書きする
+    };
+
+    # 他のメソッドは上書きされない
+ 
+    1;
+
+スタブ化したいモジュール同じパスになるように置く。(つまり lib/Foo/Bar.pmをスタブ化したい場合は stub/Foo/Bar.pmとする 
+$ENV{STUB_PATH}がstubの場合 )。
+
 
 
 
@@ -51,18 +73,25 @@ stub/Foo/Bar.pm
     };
 
 
-
-normal use
+通常の実行時
 
     $ perl app.pl  #=> woo!moo!
 
-stub use
+
+環境変数STUB_PATHをつけて実行した場合
  
 
     $ STUB_PATH=stub perl app.pl #=>stubbed!moo!
 
 
 
+# MERIT
+
+本体のコードにほとんど手を入れずに切り替えられる。設定ファイルが減らせる。etc
+
+# PROBLEM
+
+モジュール名はこんなんでいいのだろうか？プラグマっぽいから小文字始まりにしてみたが。
 
 
 # AUTHOR
