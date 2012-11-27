@@ -57,6 +57,8 @@ if $ENV{STUB_PATH} are given, for example 'stub' , this script load
 stub/Foo/Bar.pm instead of lib/Foo/Bar.pm.
 
 
+=head1 EXAMPLE
+
 app.pl
 
  use lib 'lib';

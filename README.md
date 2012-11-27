@@ -15,6 +15,8 @@ stub/Foo/Bar.pm instead of lib/Foo/Bar.pm.
 
 
 
+# EXAMPLE
+
 app.pl
 
     use lib 'lib';
