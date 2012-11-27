@@ -107,8 +107,8 @@ stub/Foo/Bar.pm
     $ STUB_PATH=stub perl app.pl #=>stubbed!moo!
 
 
-この例において、lib/Abcd/Efg.pm があり、stub/下には同モジュールがない場合は、通常通り
-use Abcd::Efgで lib/Abcd/Efg.pmが読み込まれる。
+この例においては、lib/Abcd/Efg.pm があり、stub/下には同モジュールがないため、
+use Abcd::Efgは通常どおり lib/Abcd/Efg.pmが読み込まれる。
 
 
 # MERIT
