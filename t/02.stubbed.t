@@ -1,11 +1,11 @@
 use Test::More tests => 3;
 
 BEGIN {
-    $ENV{STUB_PATH} = "t/stub";
+    $ENV{STUB} = 1;
 }
 
 use lib 't/lib';
-use lib::stub;
+use Stub::lib active_if => $ENV{STUB}, path => "t/stub";
 use Foo::Bar;
 
 is($INC[0],'t/stub');

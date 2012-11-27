@@ -1,7 +1,7 @@
 use Test::More tests => 3;
 
 use lib 't/lib';
-use lib::stub;
+use Stub::lib;
 use Foo::Bar;
 
 # normal use

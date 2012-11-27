@@ -1,10 +1,10 @@
 use Test::More tests => 1;
 
 BEGIN {
-    $ENV{STUB_PATH} =  'stub';
+    $ENV{STUB} = 1;
 }
 
 use lib 't/lib';
-use lib::stub;
+use Stub::lib;
 
 is($INC[0],'stub');

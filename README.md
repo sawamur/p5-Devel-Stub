@@ -1,6 +1,6 @@
 # NAME
 
-lib::stub - スタブ用にライブラリパスを切り替えるもの
+Stub::lib - スタブ用にライブラリパスを切り替えるもの
 
 # GOAL 
 
@@ -16,7 +16,7 @@ lib::stub - スタブ用にライブラリパスを切り替えるもの
 ### 宣言
 
     use lib qw/lib/;
-    use lib::stub;
+    use Stub::lib;
     use Foo::Bar;
 
 アプリ本体ファイルで上記のように宣言しておくと、環境変数STUB_PATHが設定されている場合において、
@@ -27,7 +27,7 @@ lib::stub - スタブ用にライブラリパスを切り替えるもの
 ### モジュール
 
     package Foo::Bar;
-    use lib::stub on => "lib";  # <- lib/下にある同名モジュールを上書きするという宣言
+    use Stub::Module on => "lib";  # <- lib/下にある同名モジュールを上書きするという宣言
 
     stub foobar => sub {
         #  元々のモジュールの sub foobar{ } を上書きする
@@ -64,7 +64,7 @@ $ENV{STUB_PATH}がstubの場合 )。
 app.pl
 
     use lib 'lib';
-    use lib::stub;  #stub化したいモジュールより先に宣言する
+    use Stub::lib active_if => $ENV{STUB};  #stub化したいモジュールより先に宣言する
     use Foo::Bar;
     use Abcd::Efg;
 
@@ -89,7 +89,7 @@ lib/Foo/Bar.pm
 stub/Foo/Bar.pm
 
     package Foo::Bar;
-    use lib::stub on => "lib";
+    use Stub::Module on => "lib";
 
     stub woo => sub {
        "stubbed!";
