@@ -39,6 +39,23 @@ $ENV{STUB_PATH}がstubの場合 )。
 
 # EXAMPLE
 
+
+ファイル構成の例
+
+```
+.
+├── app.pl
+├── lib
+│   ├── Abcd
+│   │   └── Efg.pm
+│   └── Foo
+│       └── Bar.pm
+└── stub
+    └── Foo
+        └── Bar.pm
+```
+
+
 app.pl
 
     use lib 'lib';
