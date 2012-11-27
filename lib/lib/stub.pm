@@ -9,8 +9,9 @@ use version;
 our $VERSION = qv('0.0.3');
 
 BEGIN{ 
-    if( $ENV{STUB_PATH} ) {
-        unshift @INC,$ENV{STUB_PATH} if $INC[0] ne $ENV{STUB_PATH};
+    if( $ENV{STUB_PATH} and $INC[0] ne $ENV{STUB_PATH} ){
+        unshift @INC,$ENV{STUB_PATH};
+        warn "lib::stub - path '$ENV{STUB_PATH}' has been added to \@INC\n" ;
     }   
 }
 
