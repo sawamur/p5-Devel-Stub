@@ -42,8 +42,9 @@ $ENV{STUB_PATH}がstubの場合 )。
 app.pl
 
     use lib 'lib';
-    use lib::stub;
+    use lib::stub;  #stub化したいモジュールより先に宣言する
     use Foo::Bar;
+    use Abcd::Efg;
 
     my $b = Foo::Bar->new
     print $b->woo;
@@ -83,6 +84,9 @@ stub/Foo/Bar.pm
 
     $ STUB_PATH=stub perl app.pl #=>stubbed!moo!
 
+
+この例において、lib/Abcd/Efg.pm があり、stub/下には同モジュールがない場合は、通常通り
+use Abcd::Efgで lib/Abcd/Efg.pmが読み込まれる。
 
 
 # MERIT
