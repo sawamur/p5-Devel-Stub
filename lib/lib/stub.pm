@@ -8,6 +8,12 @@ use Module::Load;
 use version; 
 our $VERSION = qv('0.0.3');
 
+BEGIN{ 
+    if( $ENV{STUB_PATH}) {
+        unshift @INC,$ENV{STUB_PATH} if $INC[0] ne $ENV{STUB_PATH};
+    }   
+}
+
 sub stub {
     my ($name,$code) = @_;
     no strict 'refs';
@@ -19,14 +25,9 @@ sub stub {
 
 sub import{
     my $class = shift;
-    my %params = @_;
-    my $stubpath = $params{path} || $ENV{STUB_PATH} || undef;
-
-    if ( $stubpath ne '' and !defined($params{on}) ){
-        unshift @INC,$stubpath;
-    }
-
-    if ( $params{on} ne '' ){
+    my %params = @_ ;
+    
+    if ( $params{on}  ){
         my ($pkg,$file) = caller;
         no strict 'refs';
         *{"${pkg}::stub"} = \&stub;
