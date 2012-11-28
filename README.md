@@ -13,7 +13,7 @@ Stub::lib - スタブ用にライブラリパスを切り替えるもの
 # SYNOPSIS
 
 
-### 宣言
+### 宣言 (メインのスクリプトにおいて)
 
     use lib qw/mylib/;
     use Stub::lib active_if => $ENV{STUB}
@@ -25,7 +25,7 @@ Stub::lib - スタブ用にライブラリパスを切り替えるもの
 スタブパスが仮にstubと指定され、なおかつstub/Foo/Bar.pmが存在する場合はそちらが読み込まれる。
 スタブモジュールではスタブ化したいメソッドのみを下記のように再定義する
 
-### モジュール
+### スタブ定義 (スタブパスに置かれたモジュールにおいて)
 
     package Foo::Bar;
     use Stub::Module on => "mylib";  # <- mylib/下にある同名モジュールを上書きするという宣言
@@ -128,7 +128,7 @@ use Stub::lib active_if => ($ENV{APP_ENV} eq 'test'), path => 't/stub';
 
 ### Stub::Module
 
-* on - 上書きするモジュールのサーチパス (省略付加)
+* on - 上書きするモジュールのサーチパス (必須)
 
 
 ```
