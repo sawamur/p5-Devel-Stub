@@ -1,3 +1,4 @@
+use strict;
 use Test::More tests => 3;
 
 BEGIN {
@@ -15,3 +16,4 @@ my $b = Foo::Bar->new;
 is($b->woo,"oh!");
 
 is($b->moo,"moo!");
+

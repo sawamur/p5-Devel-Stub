@@ -15,19 +15,20 @@ Stub::lib - スタブ用にライブラリパスを切り替えるもの
 
 ### 宣言
 
-    use lib qw/lib/;
-    use Stub::lib;
+    use lib qw/mylib/;
+    use Stub::lib active_if => $ENV{STUB}
     use Foo::Bar;
 
-アプリ本体ファイルで上記のように宣言しておくと、環境変数STUB_PATHが設定されている場合において、
-ライブラリパスの先頭にそれが追加される。つまり通常はFoo::Barは lib/Foo/Bar.pmを読み込むが
+アプリ本体ファイルで上記のように宣言しておくと、active_if引数で指定された値がtrueの場合、
+ライブラリパスの先頭にスタブ用パス(デフォルト:stub)が追加される。
+つまり通常はFoo::Barは mylib/Foo/Bar.pmを読み込むが
 スタブパスが仮にstubと指定され、なおかつstub/Foo/Bar.pmが存在する場合はそちらが読み込まれる。
 スタブモジュールではスタブ化したいメソッドのみを下記のように再定義する
 
 ### モジュール
 
     package Foo::Bar;
-    use Stub::Module on => "lib";  # <- lib/下にある同名モジュールを上書きするという宣言
+    use Stub::Module on => "mylib";  # <- mylib/下にある同名モジュールを上書きするという宣言
 
     stub foobar => sub {
         #  元々のモジュールの sub foobar{ } を上書きする
@@ -101,24 +102,46 @@ stub/Foo/Bar.pm
     $ perl app.pl  #=> woo!moo!
 
 
-環境変数STUB_PATHをつけて実行した場合
+環境変数STUBをつけて実行した場合
  
 
-    $ STUB_PATH=stub perl app.pl #=>stubbed!moo!
+    $ STUB=1 perl app.pl #=>stubbed!moo!
 
 
 この例においては、lib/Abcd/Efg.pm があり、stub/下には同モジュールがないため、
 use Abcd::Efgは通常どおり lib/Abcd/Efg.pmが読み込まれる。
 
 
-# MERIT
+# PARAMERTERS
 
-本体のコードにほとんど手を入れずに切り替えられる。設定ファイルが減らせる。etc
+### Stub::lib
 
-# PROBLEM
+use Stub::lib 
 
-モジュール名はこんなんでいいのだろうか？プラグマっぽいから小文字始まりにしてみたが。
+* active_if - 値が真の場合にスタブパスが追加される (省略可 デフォルト: $ENV{STUB})
+* path - スタブパスを指定 (省略可 デフォルト: stub )
 
+````
+use Stub::lib active_if => ($ENV{APP_ENV} eq 'test'), path => 't/stub';
+# 環境変数 APP_ENVが'test'であるとき t/stub をライブラリパスに追加
+````
+
+### Stub::Module
+
+* on - 上書きするモジュールのサーチパス (省略付加)
+
+
+```
+package Your::Mod::Ule::Pack;
+use Stub::Module on => "t/lib";
+# t/lib/Your/Mod/Ule/Pack.pm をもとにスタブ化を行う
+```
+
+
+
+# NOTES
+
+モジュール名の作法など要確認
 
 # AUTHOR
 
