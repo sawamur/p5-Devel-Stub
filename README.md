@@ -16,7 +16,7 @@ Stub::lib - スタブ用にライブラリパスを切り替えるもの
 ### 宣言 (メインのスクリプトにおいて)
 
     use lib qw/mylib/;
-    use Stub::lib active_if => $ENV{STUB}
+    use Stub::lib active_if => $ENV{STUB};
     use Foo::Bar;
 
 アプリ本体ファイルで上記のように宣言しておくと、active_if引数で指定された値がtrueの場合、
