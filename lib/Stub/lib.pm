@@ -14,9 +14,11 @@ sub import {
     my %params = @_;
     my $active_if = $params{active_if} || $ENV{STUB};
     my $stubpath = $params{path} || "stub";
+    my $quiet = $params{quiet};
 
     if ($active_if){
         unshift @INC,$stubpath if $INC[0] ne $stubpath;
+        warn __PACKAGE__," - path '$stubpath' have been added to \@INC" unless $quiet;
     }
 }
 

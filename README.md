@@ -120,6 +120,7 @@ use Stub::lib
 
 * active_if - 値が真の場合にスタブパスが追加される (省略可 デフォルト: $ENV{STUB})
 * path - スタブパスを指定 (省略可 デフォルト: stub )
+* quiet -  真を渡すとスタブパスが有効になるときに出力される警告を抑制する (省略可: デフォルト false )
 
 ````
 use Stub::lib active_if => ($ENV{APP_ENV} eq 'test'), path => 't/stub';
