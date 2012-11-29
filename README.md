@@ -140,7 +140,8 @@ use Stub::Module on => "t/lib";
 
 #### Invoke original method
 
-stub化されたメソッドのオリジナルのものは _original_[subname]という名前で呼べる。
+stub化されたメソッドのオリジナルのものは` _original_yoursubname `という書式のメソッドで呼べる。
+つまり`sub foo`ならば `_origina_foo` でよべる。
 
 
 ```
