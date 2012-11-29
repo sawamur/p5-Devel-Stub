@@ -18,7 +18,7 @@ sub import {
 
     if ($active_if){
         unshift @INC,$stubpath if $INC[0] ne $stubpath;
-        warn __PACKAGE__," - path '$stubpath' have been added to \@INC" unless $quiet;
+        print STDERR __PACKAGE__," - path '$stubpath' have been added to \@INC\n" unless $quiet;
     }
 }
 
