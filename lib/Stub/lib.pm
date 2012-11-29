@@ -28,32 +28,32 @@ __END__
 
 =head1 NAME
 
-lib::stub - change lib path for stubbing
+Stub::lib - change lib path for stubbing
 
 
 =head1 SYNOPSIS
 
  use lib qw/lib/;
- use lib::stub;
+ use Stub::lib;
  use Foo::Bar;
 
-if $ENV{STUB_PATH} are given, for example 'stub' , this script load
-stub/Foo/Bar.pm instead of lib/Foo/Bar.pm.
+if $ENV{STUB} are given, this script load stub/Foo/Bar.pm 
+instead of lib/Foo/Bar.pm.
 
 
 =head1 EXAMPLE
 
 app.pl
 
- use lib 'lib';
- use lib::stub;
+ use lib 'mylib';
+ use Stub::lib active_if => $ENV{STUB}
  use Foo::Bar;
 
  my $b = Foo::Bar->new
  print $b->woo;
  print $b->moo; 
 
-lib/Foo/Bar.pm
+mylib/Foo/Bar.pm
 
  package Foo::Bar
 
@@ -70,7 +70,7 @@ lib/Foo/Bar.pm
 stub/Foo/Bar.pm
 
  package Foo::Bar;
- use lib::stub on => "lib";
+ use Stub::Module on => "mylib";
 
  stub woo => sub {
     "stubbed!";
@@ -83,7 +83,7 @@ normal use
 
 stub use
  
- $ STUB_PATH=stub perl app.pl #=>stubbed!moo!
+ $ STUB=1 perl app.pl #=>stubbed!moo!
 
 
 
