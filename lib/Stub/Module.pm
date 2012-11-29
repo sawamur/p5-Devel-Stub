@@ -2,6 +2,7 @@ package Stub::Module;
 use strict;
 use warnings;
 use Module::Load;
+use Sub::Name qw/subname/;
 
 sub stub {
     my ($name,$code) = @_;
@@ -10,12 +11,9 @@ sub stub {
     
     my ($pkg,$file,$line) = caller;
     my $original = \&{"${pkg}::${name}"};
-
-    *{"${pkg}::_original_${name}"} = $original;
-
-    *{"${pkg}::${name}"} = $code;
+    *{"${pkg}::__original_${name}"} = $original;
+    *{"${pkg}::${name}"} = subname $name,$code;
 }
-
 
 sub import{
     my $class = shift;
@@ -25,6 +23,12 @@ sub import{
         my ($pkg,$file) = caller;
         no strict 'refs';
         *{"${pkg}::stub"} = \&stub;
+        *{"${pkg}::_original"} = sub {
+          no strict 'refs' ;
+          my (undef,undef,undef,$subr) = caller(1);
+          my $name = ( split /::/,$subr )[-1];
+          &{"${pkg}::__original_${name}"}(@_);
+        };
         my $pkgpath = $pkg;
         $pkgpath =~ s/::/\//g;
         $pkgpath .= ".pm";

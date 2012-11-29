@@ -6,7 +6,7 @@ use strict;
 use Carp;
 use Module::Load;
 use version; 
-our $VERSION = qv('0.0.3');
+our $VERSION = qv('0.1.0');
 
 
 sub import {

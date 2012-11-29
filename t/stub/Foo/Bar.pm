@@ -7,9 +7,12 @@ stub woo => sub {
 
 stub poo => sub {
     my ($self,$p) = @_;
-    unless($p){
-        return _original_poo(@_);
+    if($p == 2){
+        return _original(@_);
+    } elsif( $p == 3){
+        return $self->_original($p);        
     }
+    
     "stubed!";
 };
 
