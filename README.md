@@ -138,6 +138,26 @@ use Stub::Module on => "t/lib";
 ```
 
 
+#### Invoke original method
+
+stub化されたメソッドのオリジナルのものは _original_[subname]という名前で呼べる。
+
+
+```
+stub foo => sub {
+    my ($self,$param) = @_;
+    if($param ne 'xxx') {
+        return _original_foo(@_);  #ある条件では元々のメソッドを実行する
+    }  
+
+    ["stubbed","data","is","here"];
+};
+
+```
+
+
+
+
 
 # NOTES
 

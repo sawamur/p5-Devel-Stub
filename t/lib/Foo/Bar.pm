@@ -12,4 +12,12 @@ sub moo{
     "moo!";
 }
 
+sub poo {
+  my $self = shift;
+  my $p = shift;
+
+  "original!";
+}
+
+
 1;

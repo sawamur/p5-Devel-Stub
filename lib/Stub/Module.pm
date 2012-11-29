@@ -9,6 +9,10 @@ sub stub {
     no warnings 'redefine';
     
     my ($pkg,$file,$line) = caller;
+    my $original = \&{"${pkg}::${name}"};
+
+    *{"${pkg}::_original_${name}"} = $original;
+
     *{"${pkg}::${name}"} = $code;
 }
 
