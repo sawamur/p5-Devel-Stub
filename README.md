@@ -1,6 +1,6 @@
 # NAME
 
-Stub::lib - スタブ用にライブラリパスを切り替え、メソッド単位でスタブ化する
+Devel::Stub - スタブ用にライブラリパスを切り替え、メソッド単位でスタブ化する
 
 # GOAL 
 
@@ -18,7 +18,7 @@ Stub::lib - スタブ用にライブラリパスを切り替え、メソッド�
 ### 宣言 - アプリのメインファイルにおいて
 
     use lib qw/mylib/;
-    use Stub::lib active_if => $ENV{STUB};
+    use Devel::Stub::lib active_if => $ENV{STUB};
     use Foo::Bar;
 
 アプリ本体ファイルで上記のように宣言しておくと、active_if引数で指定された値がtrueの場合、
@@ -30,7 +30,7 @@ Stub::lib - スタブ用にライブラリパスを切り替え、メソッド�
 ### スタブ定義 - スタブ化したいパッケージにおいて
 
     package Foo::Bar;
-    use Stub::Module on => "mylib";  # <- mylib/下にある同名モジュールを上書きするという宣言
+    use Devel::Stub on => "mylib";  # <- mylib/下にある同名モジュールを上書きするという宣言
 
     stub foobar => sub {
         #  元々のモジュールの sub foobar{ } を上書きする
@@ -67,7 +67,7 @@ $ENV{STUB_PATH}がstubの場合 )。
 app.pl
 
     use lib 'lib';
-    use Stub::lib active_if => $ENV{STUB};  #stub化したいモジュールより先に宣言する
+    use Devel::Stub::lib active_if => $ENV{STUB};  #stub化したいモジュールより先に宣言する
     use Foo::Bar;
     use Abcd::Efg;
 
@@ -92,7 +92,7 @@ lib/Foo/Bar.pm
 stub/Foo/Bar.pm
 
     package Foo::Bar;
-    use Stub::Module on => "lib";
+    use Devel::Stub on => "lib";
 
     stub woo => sub {
        "stubbed!";
@@ -116,27 +116,29 @@ use Abcd::Efgは通常どおり lib/Abcd/Efg.pmが読み込まれる。
 
 # PARAMERTERS
 
-### Stub::lib
+### Devel::Stub::lib
 
-use Stub::lib 
+use Devel::Stub::lib;
 
 * active_if - 値が真の場合にスタブパスが追加される (省略可 デフォルト: $ENV{STUB})
 * path - スタブパスを指定 (省略可 デフォルト: stub )
 * quiet -  真を渡すとスタブパスが有効になるときに出力される警告を抑制する (省略可: デフォルト false )
 
 ````
-use Stub::lib active_if => ($ENV{APP_ENV} eq 'test'), path => 't/stub';
+use Devel::Stub::lib active_if => ($ENV{APP_ENV} eq 'test'), path => 't/stub',quiet => 1;
 # 環境変数 APP_ENVが'test'であるとき t/stub をライブラリパスに追加
 ````
 
-### Stub::Module
+### Devel::Stub
+
+use Devel::Stub;
 
 * on - 上書きするモジュールのサーチパス (必須)
 
 
 ```
 package Your::Mod::Ule::Pack;
-use Stub::Module on => "t/lib";
+use Devel::Stub on => "t/lib";
 # t/lib/Your/Mod/Ule/Pack.pm をもとにスタブ化を行う
 ```
 
