@@ -5,6 +5,6 @@ BEGIN {
 }
 
 use lib 't/lib';
-use Stub::lib;
+use Devel::Stub::lib;
 
 is($INC[0],'stub');

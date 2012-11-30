@@ -1,5 +1,5 @@
 package Foo::Bar;
-use Stub::Module on => "t/lib";
+use Devel::Stub on => "t/lib";
 
 stub woo => sub {
     "oh!";

@@ -3,10 +3,10 @@ use warnings;
 use ExtUtils::MakeMaker;
 
 WriteMakefile(
-    NAME                => 'lib::stub',
+    NAME                => 'Devel::Stub',
     AUTHOR              => 'Masaki Sawamura <sawamura.masaki@dena.jp>',
-    VERSION_FROM        => 'lib/Stub/lib.pm',
-    ABSTRACT_FROM       => 'lib/Stub/lib.pm',
+    VERSION_FROM        => 'lib/Devel/Stub.pm',
+    ABSTRACT_FROM       => 'lib/Devel/Stub.pm',
     PL_FILES            => {},
     PREREQ_PM => {
         'Test::More' => 0,
@@ -14,5 +14,5 @@ WriteMakefile(
         'Module::Load' => 0
     },
     dist                => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
-    clean               => { FILES => 'Stub-lib-*' },
+    clean               => { FILES => 'Devel-Stub-*' },
 );

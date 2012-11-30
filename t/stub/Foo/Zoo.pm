@@ -1,5 +1,5 @@
 package Foo::Zoo;
-use Stub::Module on => "t/lib";
+use Devel::Stub on => "t/lib";
 
 stub 'new' => sub {
     my $class = shift;

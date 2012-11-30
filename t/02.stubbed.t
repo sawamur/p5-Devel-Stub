@@ -6,7 +6,7 @@ BEGIN {
 }
 
 use lib 't/lib';
-use Stub::lib active_if => $ENV{STUB}, path => "t/stub";
+use Devel::Stub::lib active_if => $ENV{STUB}, path => "t/stub";
 use Foo::Bar;
 
 is($INC[0],'t/stub');

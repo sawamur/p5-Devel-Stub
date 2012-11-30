@@ -2,7 +2,7 @@
 use strict;
 use Test::More;
 use lib 't/lib';
-use Stub::lib active_if => 1, path => "t/stub",quiet => 1;
+use Devel::Stub::lib active_if => 1, path => "t/stub",quiet => 1;
 use Foo::Bar;
 
 

@@ -1,13 +1,9 @@
 # -*- coding: utf-8 -*- 
-package Stub::lib;
+package Devel::Stub::lib;
 
 use warnings;
 use strict;
 use Carp;
-use Module::Load;
-use version; 
-our $VERSION = qv('0.1.0');
-
 
 sub import {
     my $class = shift;
@@ -28,13 +24,13 @@ __END__
 
 =head1 NAME
 
-Stub::lib - change lib path for stubbing
+Devel::Stub::lib - change lib path for stubbing
 
 
 =head1 SYNOPSIS
 
  use lib qw/lib/;
- use Stub::lib;
+ use Devel::Stub::lib;
  use Foo::Bar;
 
 if $ENV{STUB} are given, this script load stub/Foo/Bar.pm 
@@ -46,7 +42,7 @@ instead of lib/Foo/Bar.pm.
 app.pl
 
  use lib 'mylib';
- use Stub::lib active_if => $ENV{STUB}
+ use Devel::Stub::lib active_if => $ENV{STUB}
  use Foo::Bar;
 
  my $b = Foo::Bar->new
@@ -70,7 +66,7 @@ mylib/Foo/Bar.pm
 stub/Foo/Bar.pm
 
  package Foo::Bar;
- use Stub::Module on => "mylib";
+ use Devel::Stub on => "mylib";
 
  stub woo => sub {
     "stubbed!";

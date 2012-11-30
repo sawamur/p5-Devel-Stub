@@ -5,8 +5,8 @@ BEGIN {
 use strict;
 use Test::More;
 use lib 't/lib';
-use Stub::lib 
-    active_if => ($ENV{APP_ENV} eq 'local'), path => "t/stub";
+use Devel::Stub::lib 
+      active_if => ($ENV{APP_ENV} eq 'local'), path => "t/stub";
 use Foo::Bar;
 use Foo::Zoo;
 
