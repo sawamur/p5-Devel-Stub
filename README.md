@@ -171,13 +171,13 @@ stub foo => sub {
 
 # AUTHOR
 
-Masaki Sawamura  `<sawamura.masaki@dena.jp>`
+Masaki Sawamura  
 
 
 
 # LICENCE AND COPYRIGHT
 
-Copyright (c) 2012, Masaki Sawamura `<sawamura.masaki@dena.jp>`. All rights reserved.
+Copyright (c) 2012, Masaki Sawamura . All rights reserved.
 
 This module is free software; you can redistribute it and/or
 modify it under the same terms as Perl itself. See [perlartistic](http://search.cpan.org/perldoc?perlartistic).
