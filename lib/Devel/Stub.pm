@@ -228,7 +228,7 @@ you can invoke original method with C<_orginal()>.
 
 =head1 AUTHOR
 
-Masaki Sawamura <masaki.sw@gmail.com>
+Masaki Sawamura <sawamur@cpan.org>
 
 
 =head1 LICENCE AND COPYRIGHT
