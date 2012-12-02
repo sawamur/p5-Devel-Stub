@@ -3,9 +3,8 @@ use strict;
 use warnings;
 use Module::Load;
 use Sub::Name qw/subname/;
-use version; 
+use version;
 our $VERSION = qv('0.01');
-
 
 sub stub {
     my ($name,$code) = @_;
