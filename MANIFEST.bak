@@ -1,14 +1,14 @@
+.pause
+.shipit
 Changes
 lib/Devel/Stub.pm
 lib/Devel/Stub/lib.pm
-Makefile
 Makefile.old
 Makefile.PL
 MANIFEST			This list of files
 MANIFEST.bak
 MANIFEST.SKIP
-MYMETA.json
-MYMETA.yml
+README
 t/00.load.t
 t/01.stubpath.t
 t/02.stubbed.t

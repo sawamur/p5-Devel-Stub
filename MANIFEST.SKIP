@@ -1,6 +1,12 @@
 README.ja.md
-Makefile
+Makefile$
+Makefile.old$
 .git
 .*~
 MYMETA.yml
 MYMETA.json
+.shipit
+.pause
+MANIFEST.bak
+MANIFEST.SKIP
+
