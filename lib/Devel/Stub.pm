@@ -4,7 +4,7 @@ use warnings;
 use Module::Load;
 use Sub::Name qw/subname/;
 use version; 
-our $VERSION = qv('0.1.0');
+our $VERSION = qv('0.01');
 
 
 sub stub {
@@ -49,36 +49,53 @@ __END__
 
 Devel::Stub - stub some methods for development purpose
 
-=head1 GOAL
+=head1 TYPICAL USAGE
+
+When you develop a webapp,you'd like to  develop views and/or
+controllers using stubbed model modules which can return expected data.
 
 
+=over 2
+
+=item * With this module,you can stub some method on exisiting moudle 
+
+=item * This module adds a lib path on initializing the app (when invoked with specific environment variable) so that you can organize stub file on the path outside of main lib path
+
+=item * Changes you have to do on main app are just one line and it doesn't affect if you kick the app in usual way. You have to do nothing on existing modules.
+
+=back
 
 
 =head1 SYNOPSIS
+
+The step is:
+1) declare Devel::Stub::lib on main applicaton file. 2) Overide methods with module which has same pacakge of original one.
 
 
 =head2 Devel::Stub::lib
 
 Change lib path for stubbing.
 
- use lib qw/lib/;
- use Devel::Stub::lib;
+ use lib qw/mylib/;
+ use Devel::Stub::lib active_if => $ENV{STUB};
  use Foo::Bar;
 
-if $ENV{STUB} are given, this script load stub/Foo/Bar.pm 
-instead of lib/Foo/Bar.pm.
-
+In this case,if $ENV{STUB} are given, this script will add 'stub' to @INC.
 
 =head2 Devel::Stub
 
 Stub some methods on existing module.
 
-  package Hoo::Bar;
+stub/Foo/Bar.pm
+
+  package Foo::Bar;
   use Devel::Stub on => 'mylib';
+  # this moudle override methods on mylib/Foo/Bar.pm
 
   stub foo => sub {
       "stubbed!"
   };
+
 
 
 =head1 EXAMPLE
@@ -115,6 +132,7 @@ Suppose these files;
  sub moo {
      "moo!"
  }
+ 1;
 
 =item stub/Foo/Bar.pm
 
@@ -124,6 +142,9 @@ Suppose these files;
  stub woo => sub {
     "stubbed!";
  };
+ # override just 'woo' method. Others are intact.
+ 1;
+
 
 =back
 
@@ -136,10 +157,78 @@ stub use
  $ STUB=1 perl app.pl #=>stubbed!moo!
 
 
+=head1 PARAMETERS
+
+
+=head2 Devel::Stub::lib
+
+
+EXAMPLE:
+
+ use Devel::Stub::lib 
+    active_if => ($ENV{APP_ENV} eq 'development'), path => 'mystub', quiet => 1;
+
+
+=over 4
+
+=item active_if (optional - default: $ENV{STUB} )
+
+specify condition for including stub path. 
+
+=item path (optional - default: 'stub' )
+
+specify path for stub modules. That will insert on top of @INC
+
+=item quite (optional - default: false )
+
+if true is given,no warning message will be shown when entering stub mode.
+
+=back
+
+=head2 Devel::Stub
+
+EXAMPLE:
+
+  use Devel::Stub on => "mylib"
+
+=over 4
+
+=item on (required)
+
+specify where original modules are located. That mean if you want to stub method in 'foo_lib/Foga/Woo.pm',
+you should put 'foo_lib'.
+
+=back
+
+=head1 WRITING STUBS
+
+you can define stubs with C<stub> method.
+
+  package Foo::Woo;
+  use Devel::Stub on => 'mylib'
+
+  stub hoo => sub {
+     +{ stubbed => "data"};
+  };
+
+  1;
+
+=head2 INVOKE ORIGINAL METHOD
+
+you can invoke original method with C<_orginal()>.
+
+ stub foo => sub {
+   my ($self,$param) = @_;
+   if($param ne 'xxx') {
+       return _original(@_);  # invoke original one for some situation.
+   }  
+   ["stubbed","data","is","here"];
+ };
+
 
 =head1 AUTHOR
 
-Masaki Sawamura
+Masaki Sawamura <masaki.sw@gmail.com>
 
 
 =head1 LICENCE AND COPYRIGHT

@@ -11,7 +11,8 @@ WriteMakefile(
     PREREQ_PM => {
         'Test::More' => 0,
         'version'    => 0,
-        'Module::Load' => 0
+        'Module::Load' => 0,
+	'Sub::Name' => 0
     },
     dist                => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
     clean               => { FILES => 'Devel-Stub-*' },
