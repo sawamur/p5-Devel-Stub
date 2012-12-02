@@ -4,7 +4,7 @@ use ExtUtils::MakeMaker;
 
 WriteMakefile(
     NAME                => 'Devel::Stub',
-    AUTHOR              => 'Masaki Sawamura <sawamura.masaki@dena.jp>',
+    AUTHOR              => 'Masaki Sawamura <sawamur@cpan.org>',
     VERSION_FROM        => 'lib/Devel/Stub.pm',
     ABSTRACT_FROM       => 'lib/Devel/Stub.pm',
     PL_FILES            => {},
