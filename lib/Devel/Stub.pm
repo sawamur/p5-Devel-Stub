@@ -4,7 +4,7 @@ use warnings;
 use Module::Load;
 use Sub::Name qw/subname/;
 use version;
-our $VERSION = qv('0.01');
+our $VERSION = qv('0.02');
 
 sub stub {
     my %params = @_;
