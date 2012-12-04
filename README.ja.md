@@ -143,7 +143,7 @@ use Devel::Stub on => "t/lib";
 ```
 
 
-#### Invoke original method
+#### INVOKE ORIGINAL METHOD
 
 
 stub化されたメソッドのオリジナルのものは _originalメソッドで呼べる。
@@ -162,8 +162,29 @@ stub foo => sub {
 ```
 
 
+#### TAGGING 
 
+stub指定する際にTAGパラメータを加えることによって、環境変数 STUB_TAG に該当する値が
+指定された場合にのみ上書きされる
 
+```
+stub foo => sub {
+    "stubbed!";
+},TAG => ["devel","local"];
+
+stub 
+    TAG => ["staging"],
+    moo => sub  {
+      "stubbed!";
+};
+```        
+上記のように指定した場合は
+
+```
+$ STUB=1 STUB_TAG=local perl app.pl  # 'foo' はスタブが実行される
+$ STUB=1 STUB_TAG=staging perl app.pl # 'moo' はスタブが実行される
+$ STUB=1 perl app.pl # 両方とも実行されない
+```
 
 # NOTES
 
